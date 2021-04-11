@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Project Details</title>
+<title>Add Project</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -27,62 +27,231 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 
+<style type="text/css">
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	padding-top: 4.5rem;
+	margin-bottom: 4.5rem;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 3.5rem;
+	line-height: 3.5rem;
+	background-color: #ccc;
+}
+
+.nav-link:hover {
+	transition: all 0.4s;
+}
+
+.nav-link-collapse:after {
+	float: right;
+	content: '\f067';
+	font-family: 'FontAwesome';
+}
+
+.nav-link-show:after {
+	float: right;
+	content: '\f068';
+	font-family: 'FontAwesome';
+}
+
+.nav-item ul.nav-second-level {
+	padding-left: 0;
+}
+
+.nav-item ul.nav-second-level>.nav-item {
+	padding-left: 20px;
+}
+
+@media ( min-width : 992px) {
+	.sidenav {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 230px;
+		height: calc(100vh - 3.5rem);
+		margin-top: 3.5rem;
+		background: #343a40;
+		box-sizing: border-box;
+		border-top: 1px solid rgba(0, 0, 0, 0.3);
+	}
+	.navbar-expand-lg .sidenav {
+		flex-direction: column;
+	}
+	.content-wrapper {
+		margin-left: 230px;
+	}
+	.footer {
+		width: calc(100% - 230px);
+		margin-left: 230px;
+	}
+}
+</style>
+
 </head>
-<body>
+<body style="background-color: #f0f0f0">
 
 	<!-- Navbar-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid justify-content-between">
-			<!-- Left elements -->
-			<div class="d-flex">
-				<!-- Brand -->
-				<a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
-					<!-- <img
-					src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-					height="20" alt="" loading="lazy" style="margin-top: 2px;" /> --> <span
-					style="font-weight: 750">GadgetBadget</span>
-				</a>
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">GadgetBadget</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarCollapse" aria-controls="navbarCollapse"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-				<!-- Search form -->
-			</div>
-			<!-- Left elements -->
-
-			<!-- Center elements -->
-			<ul class="navbar-nav flex-row d-none d-md-flex">
-				<li class="nav-item me-3 me-lg-1 active"><a class="nav-link"
-					href="#">Home</a></li>
-
-				<li class="dropdown navbar-nav flex-row d-none d-md-flex"><a
-					class="nav-link" href="#" role="button" id="dropdownMenuLink"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Catogery</a>
-
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">Project</a>
-						<a class="dropdown-item" href="#">Product</a>
-						<a class="dropdown-item" href="#">Something else here</a>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+				<li class="nav-item ml-3"><a class="nav-link"
+					href="AdminPanel.jsp">Home </a></li>
+				<!-- 				<li class="nav-item"><a class="nav-link" href="#">Item 1</a></li> -->
+				<li class="nav-item ml-3"><a class="nav-link nav-link-collapse"
+					href="#" id="hasSubItems" data-toggle="collapse"
+					data-target="#collapseSubItems2" aria-controls="collapseSubItems2"
+					aria-expanded="false">User Details</a>
+					<ul class="nav-second-level collapse" id="collapseSubItems2"
+						data-parent="#navAccordion">
+						<li style="list-style-type: none;" class="nav-item"><a
+							class="nav-link" href="#"> <span class="nav-link-text">Add
+									User</span>
+						</a></li>
+						<li style="list-style-type: none;" class="nav-item"><a
+							class="nav-link" href="#"> <span class="nav-link-text">Item
+									2.2</span>
+						</a></li>
 					</ul></li>
-
+				<li class="nav-item active ml-3"><a
+					class="nav-link nav-link-collapse" href="#" id="hasSubItems"
+					data-toggle="collapse" data-target="#collapseSubItems3"
+					aria-controls="collapseSubItems3" aria-expanded="false">Project
+						Details<span class="sr-only">(current)</span>
+				</a>
+					<ul class="nav-second-level collapse" id="collapseSubItems3"
+						data-parent="#navAccordion">
+						<li style="list-style-type: none;" class="nav-item"><a
+							class="nav-link" href="AddProject.jsp"> <span
+								class="nav-link-text">Add Project</span>
+						</a></li>
+					</ul></li>
+				<li class="nav-item ml-3"><a class="nav-link" href="#">Item
+						3</a></li>
+				<li class="nav-item ml-3"><a class="nav-link nav-link-collapse"
+					href="#" id="hasSubItems" data-toggle="collapse"
+					data-target="#collapseSubItems4" aria-controls="collapseSubItems4"
+					aria-expanded="false">Item 4</a>
+					<ul class="nav-second-level collapse" id="collapseSubItems4"
+						data-parent="#navAccordion">
+						<li style="list-style-type: none;" class="nav-item"><a
+							class="nav-link" href="#"> <span class="nav-link-text">Item
+									4.1</span>
+						</a></li>
+						<li style="list-style-type: none;" class="nav-item ml-3"><a
+							class="nav-link" href="#"> <span class="nav-link-text">Item
+									4.2</span>
+						</a></li>
+						<li style="list-style-type: none;" class="nav-item ml-3"><a
+							class="nav-link" href="#"> <span class="nav-link-text">Item
+									4.2</span>
+						</a></li>
+					</ul></li>
+				<li class="nav-item ml-3"><a class="nav-link" href="#">Item
+						5</a></li>
 			</ul>
-			<!-- Center elements -->
-
-			<!-- Right elements -->
-			<ul class="navbar-nav flex-row">
-				<!-- <li class="nav-item me-3 me-lg-1"><a
-					class="nav-link d-sm-flex align-items-sm-center" href="#"> <img
-						src="https://mdbootstrap.com/img/new/avatars/1.jpg"
-						class="rounded-circle" height="22" alt="" loading="lazy" /> <strong
-						class="d-none d-sm-block ms-1">John</strong>
-				</a></li> -->
-				<li><a data-toggle="modal" data-target="#exampleModal"
-					class="nav-link"
-					href=""></span> Sign Up</a></li>
-				<li><a class="nav-link"
-					href=""></span> Login</a></li>
-			</ul>
-			<!-- Right elements -->
+			<form class="form-inline ml-auto mt-2 mt-md-0">
+				<li class="mr-3" style="list-style-type: none;"><a
+					style="text-decoration: none; color: white" data-toggle="modal"
+					data-target="#exampleModal" class="nav-lin" href=""></span> Sign Up</a></li>
+				<li style="list-style-type: none;"><a
+					style="text-decoration: none; color: white" class="nav-lin" href=""></span>
+						Login</a></li>
+			</form>
 		</div>
 	</nav>
+
+	<main class="content-wrapper">
+		<div class="container-fluid">
+			<section class="mt-3">
+				<div class="container">
+					<h2 class="mb-3">Add Project Details</h2>
+					<form class="row g-3 needs-validation" novalidate>
+						<div class="col-md-12 mb-3">
+							<label for="validationCustom03" class="form-label">Select
+								Project Category</label> <select class="form-select form-control"
+								id="project_category" name="project_category"
+								aria-label="Default select example">
+								<option selected>Select Project Category</option>
+								<option value="1">Art</option>
+								<option value="2">Technology</option>
+								<option value="3">Design And Tech</option>
+								<option value="3">Game</option>
+								<option value="3">Music</option>
+								<option value="3">Food</option>
+								<option value="3">Films</option>
+							</select>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationCustom01" class="form-label">Project
+								Name</label> <input type="text" class="form-control" id="project_name"
+								name="project_name" placeholder="Project Name">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationCustom02" class="form-label">Short
+								Description</label> <input type="text" class="form-control"
+								id="short_des" name="short_des" placeholder="Short Description">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationCustomUsername" class="form-label">Date</label>
+							<input type="date" class="form-control"
+								id="date" name="date"
+								aria-describedby="inputGroupPrepend">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationCustom03" class="form-label">Project Goal</label> <input
+								type="text" class="form-control" id="project_goal" name="project_goal" placeholder="Project Goal">
+						</div>
+						<!-- <div class="col-md-6 mb-3">
+							<label for="validationCustom03" class="form-label">Select</label>
+							<select class="form-select form-control"
+								aria-label="Default select example">
+								<option selected>Open this select menu</option>
+								<option value="1">One</option>
+								<option value="2">Two</option>
+								<option value="3">Three</option>
+							</select>
+						</div> -->
+
+						<div class="col-md-6">
+							<label for="validationCustom05" class="form-label">Long Description</label>
+								<textarea id="form10" class="md-textarea form-control" rows="5" placeholder="Long Description"></textarea>
+						</div>
+
+						<div class="col-12 mt-5">
+							<button class="btn btn-primary" type="button">Save
+								Project</button>
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="text-center">
+				<span>Team  <a href="#">SI-Dev</a>,
+					2021
+				</span>
+			</div>
+		</div>
+	</footer>
 	<!-- Navbar -->
 
 	<!-- login modal -->
@@ -110,159 +279,14 @@
 	</div>
 
 
-	<div class="container">
-		<h1>Welcome to GadgetBadget</h1>
-	</div>
-
-	<!-- Footer -->
-	<footer class="bg-dark text-center text-white mt-5">
-		<!-- Grid container -->
-		<div class="container p-4">
-			<!-- Section: Social media -->
-			<section class="mb-4">
-				<!-- Facebook -->
-				<a class="btn btn-outline-light btn-floating m-1" href="#!"
-					role="button"><i class="fab fa-facebook-f"></i></a>
-
-				<!-- Twitter -->
-				<a class="btn btn-outline-light btn-floating m-1" href="#!"
-					role="button"><i class="fab fa-twitter"></i></a>
-
-				<!-- Google -->
-				<a class="btn btn-outline-light btn-floating m-1" href="#!"
-					role="button"><i class="fab fa-google"></i></a>
-
-				<!-- Instagram -->
-				<a class="btn btn-outline-light btn-floating m-1" href="#!"
-					role="button"><i class="fab fa-instagram"></i></a>
-
-				<!-- Linkedin -->
-				<a class="btn btn-outline-light btn-floating m-1" href="#!"
-					role="button"><i class="fab fa-linkedin-in"></i></a>
-
-				<!-- Github -->
-				<a class="btn btn-outline-light btn-floating m-1" href="#!"
-					role="button"><i class="fab fa-github"></i></a>
-			</section>
-			<!-- Section: Social media -->
-
-			<!-- Section: Form -->
-			<section class="">
-				<form action="">
-					<!--Grid row-->
-					<div class="row d-flex justify-content-center">
-						<!--Grid column-->
-						<div class="col-auto">
-							<p class="pt-2">
-								<strong>Sign up for our newsletter</strong>
-							</p>
-						</div>
-						<!--Grid column-->
-
-						<!--Grid column-->
-						<div class="col-md-5 col-12">
-							<!-- Email input -->
-							<div class="form-outline form-white mb-4">
-								<input type="email" id="form5Example2" class="form-control" />
-								<label class="form-label" for="form5Example2">Email
-									address</label>
-							</div>
-						</div>
-						<!--Grid column-->
-
-						<!--Grid column-->
-						<div class="col-auto">
-							<!-- Submit button -->
-							<button type="submit" class="btn btn-outline-light mb-4">
-								Subscribe</button>
-						</div>
-						<!--Grid column-->
-					</div>
-					<!--Grid row-->
-				</form>
-			</section>
-			<!-- Section: Form -->
-
-			<!-- Section: Text -->
-			<section class="mb-4">
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-					distinctio earum repellat quaerat voluptatibus placeat nam, commodi
-					optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-					sequi voluptate quas.</p>
-			</section>
-			<!-- Section: Text -->
-
-			<!-- Section: Links -->
-			<section class="">
-				<!--Grid row-->
-				<div class="row">
-					<!--Grid column-->
-					<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-						<h5 class="text-uppercase">Links</h5>
-
-						<ul class="list-unstyled mb-0">
-							<li><a href="#!" class="text-white">Link 1</a></li>
-							<li><a href="#!" class="text-white">Link 2</a></li>
-							<li><a href="#!" class="text-white">Link 3</a></li>
-							<li><a href="#!" class="text-white">Link 4</a></li>
-						</ul>
-					</div>
-					<!--Grid column-->
-
-					<!--Grid column-->
-					<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-						<h5 class="text-uppercase">Links</h5>
-
-						<ul class="list-unstyled mb-0">
-							<li><a href="#!" class="text-white">Link 1</a></li>
-							<li><a href="#!" class="text-white">Link 2</a></li>
-							<li><a href="#!" class="text-white">Link 3</a></li>
-							<li><a href="#!" class="text-white">Link 4</a></li>
-						</ul>
-					</div>
-					<!--Grid column-->
-
-					<!--Grid column-->
-					<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-						<h5 class="text-uppercase">Links</h5>
-
-						<ul class="list-unstyled mb-0">
-							<li><a href="#!" class="text-white">Link 1</a></li>
-							<li><a href="#!" class="text-white">Link 2</a></li>
-							<li><a href="#!" class="text-white">Link 3</a></li>
-							<li><a href="#!" class="text-white">Link 4</a></li>
-						</ul>
-					</div>
-					<!--Grid column-->
-
-					<!--Grid column-->
-					<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-						<h5 class="text-uppercase">Links</h5>
-
-						<ul class="list-unstyled mb-0">
-							<li><a href="#!" class="text-white">Link 1</a></li>
-							<li><a href="#!" class="text-white">Link 2</a></li>
-							<li><a href="#!" class="text-white">Link 3</a></li>
-							<li><a href="#!" class="text-white">Link 4</a></li>
-						</ul>
-					</div>
-					<!--Grid column-->
-				</div>
-				<!--Grid row-->
-			</section>
-			<!-- Section: Links -->
-		</div>
-		<!-- Grid container -->
-
-		<!-- Copyright -->
-		<div class="text-center p-3"
-			style="background-color: rgba(0, 0, 0, 0.2);">
-			© 2020 Copyright: <a class="text-white"
-				href="https://mdbootstrap.com/">MDBootstrap.com</a>
-		</div>
-		<!-- Copyright -->
-	</footer>
-	<!-- Footer -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.nav-link-collapse').on('click', function() {
+				$('.nav-link-collapse').not(this).removeClass('nav-link-show');
+				$(this).toggleClass('nav-link-show');
+			});
+		});
+	</script>
 
 </body>
 </html>
