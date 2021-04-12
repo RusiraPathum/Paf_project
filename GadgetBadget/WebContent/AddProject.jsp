@@ -230,7 +230,7 @@ body {
 
 						<div class="col-md-6">
 							<label for="validationCustom05" class="form-label">Long Description</label>
-								<textarea id="form10" class="md-textarea form-control" rows="5" placeholder="Long Description"></textarea>
+								<textarea id="form10" id="long_des" name="long_des" class="md-textarea form-control" rows="5" placeholder="Long Description"></textarea>
 						</div>
 
 						<div class="col-12 mt-5">
