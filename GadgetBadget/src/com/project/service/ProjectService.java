@@ -1,4 +1,4 @@
-package com.gadget_badget.project.service;
+package com.project.service;
 
 import java.awt.PageAttributes.MediaType;
 
@@ -15,7 +15,7 @@ import org.jsoup.parser.Parser;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import com.gadget_badget.project.model.ProjectServlet;
+import com.project.model.ProjectServlet;
 
 
 @Path("/Projects")
