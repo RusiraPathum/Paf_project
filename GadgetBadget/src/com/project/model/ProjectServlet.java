@@ -23,7 +23,7 @@ public class ProjectServlet {
 		}
 		
 		//insert
-		public String insertProject ( String project_category, String project_name, String short_des, String price, String date, String project_goal, String long_des) {
+		public String insertProject (String project_category, String project_name, String short_des, String price, String date, String project_goal, String long_des) {
 			
 			String output = "";
 			
@@ -34,26 +34,31 @@ public class ProjectServlet {
 					return "Error Inserting";
 				}
 				
-				String query = "INSERT INTO project(project_category, project_name, short_des, price, date, project_goal, long_des) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO project (project_category, project_name, short_des, price, date, project_goal, long_des) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				
+			
 				
 				PreparedStatement ps = con.prepareStatement(query);
 				
-//				ps.setInt(1, 0);
+//				ps.setInt(1, 0);;
 				ps.setString(1, project_category);
 				ps.setString(2, project_name);
 				ps.setString(3, short_des);
-				ps. setDouble(4, Double.parseDouble(price));
+				ps. setString(4, price);
 				ps.setString(5, date);
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
 				
+//				System.out.println(query);
 				ps.execute();
 				con.close();
 				output = "Project Details have been Inserted Successfully !";
 				
 			} catch (Exception e) {
 				output = "Project Details Inserted Failed";
-				System.err.println(e.getMessage());
+				System.out.println(e.getMessage());
+				System.out.println(e);
+				e.printStackTrace();
 			}
 			
 			return output;
@@ -82,7 +87,7 @@ public class ProjectServlet {
 						+ "<th style='padding:10px; text-align:center;'>Update</th><th>Remove</th></tr>";
 
 				String query = "SELECT * FROM project";
-				System.out.println(query);
+//				System.out.println(query);
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				// iterate through the rows in the result set
@@ -96,8 +101,8 @@ public class ProjectServlet {
 					String projectGoal = rs.getString("project_goal");
 					String projectLongDes = rs.getString("long_des");
 					
-					System.out.println(projectID);
-					System.out.println(projectName);
+//					System.out.println(projectID);
+//					System.out.println(projectName);
 
 					// Add into the html table
 					output += "<tr><td style='padding:10px; text-align:center;'>" + projectID + "</td>";
@@ -149,7 +154,7 @@ public class ProjectServlet {
 						+ "<th style='padding:10px; text-align:center;'>Update</th><th>Remove</th></tr>";
 
 				String query = "SELECT * FROM project";
-				System.out.println(query);
+//				System.out.println(query);
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				// iterate through the rows in the result set
@@ -163,8 +168,8 @@ public class ProjectServlet {
 					String projectGoal = rs.getString("project_goal");
 					String projectLongDes = rs.getString("long_des");
 					
-					System.out.println(projectID);
-					System.out.println(projectName);
+//					System.out.println(projectID);
+//					System.out.println(projectName);
 
 					// Add into the html table
 					output += "<tr><td style='padding:10px; text-align:center;'>" + projectID + "</td>";
@@ -258,6 +263,7 @@ public class ProjectServlet {
 				System.err.println(e.getMessage());
 				
 			}
+			
 			
 			return output;
 			
