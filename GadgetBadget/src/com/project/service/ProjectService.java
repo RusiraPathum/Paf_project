@@ -62,11 +62,12 @@ public class ProjectService {
 	
 	@PUT
 	@Path("/")
-	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String updateProject(String projectData) {
 		
 		JsonObject projectObject = new JsonParser().parse(projectData).getAsJsonObject();
+//		JsonObject projectObject = new JsonObject().getAsJsonObject(projectData);
 		
 		String pid = projectObject.get("pid").getAsString();
 		String pproject_categoryid = projectObject.get("project_category").getAsString();
@@ -89,10 +90,12 @@ public class ProjectService {
 	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String deleteProject(String projectData) {
 		
-		Document doc = Jsoup.parse(projectData, "", Parser.xmlParser());
+		Document document = Jsoup.parse(projectData, "", Parser.xmlParser());
 		
-		String pid = doc.select("pid").text();
+		String pid = document.select("pid").text();
+		System.out.println(pid);
 		String output = projectObj.deleteProject(pid);
+		System.out.println(output);
 		return output;
 		
 	}

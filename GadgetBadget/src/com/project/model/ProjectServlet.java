@@ -217,7 +217,7 @@ public class ProjectServlet {
 				ps.setString(1, project_category);
 				ps.setString(2, project_name);
 				ps.setString(3, short_des);
-				ps.setDouble(4, Double.parseDouble(price));
+				ps.setString(4, price);
 				ps.setString(5, date);
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
@@ -230,6 +230,9 @@ public class ProjectServlet {
 			} catch (Exception e) {
 				output = "Error while updating project details...!";
 				System.err.println(e.getMessage());
+				System.out.println(e.getMessage());
+				System.out.println(e);
+				e.printStackTrace();
 			}
 			
 			return output;
@@ -248,8 +251,11 @@ public class ProjectServlet {
 			
 			try {
 				
-				String query = "DELETE FORM project WHERE pid=?";
+				String query = "DELETE FROM project WHERE pid=?";
 				PreparedStatement ps = con.prepareStatement(query);
+				
+//				System.out.println(query);
+//				System.out.println(pid);
 				
 				ps.setInt(1, Integer.parseInt(pid));
 				
@@ -261,6 +267,9 @@ public class ProjectServlet {
 				
 				output = "Error while deleting the project from the database.";
 				System.err.println(e.getMessage());
+				System.out.println(e.getMessage());
+				System.out.println(e);
+				e.printStackTrace();
 				
 			}
 			
