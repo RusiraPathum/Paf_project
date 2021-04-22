@@ -27,6 +27,8 @@ public class ProjectService {
 	
 	ProjectServlet projectObj = new ProjectServlet();
 	
+	//get
+	
 	@GET
 	@Path("/")
 	@Produces(javax.ws.rs.core.MediaType.TEXT_HTML)
@@ -34,6 +36,7 @@ public class ProjectService {
 		return projectObj.readProjects();
 	}
 	
+	//get all
 	
 	@GET
 	@Path("/details")
@@ -59,6 +62,7 @@ public class ProjectService {
 		return output;
 	}
 	
+	//update
 	
 	@PUT
 	@Path("/")
@@ -83,6 +87,7 @@ public class ProjectService {
 	
 	}
 	
+	//delete
 	
 	@DELETE
 	@Path("/")
