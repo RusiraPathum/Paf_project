@@ -1,162 +1,89 @@
-
-
-
 package com.service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.model.Product;
+import com.service.ProductService;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.parser.Parser;
+
+
+
+@Path("/Produts")
 public class ProductService {
+	Product product = new Product();
 
-	private Connection connect() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3333/gadgetbadget", "root", "");
-			System.out.println("Connection successfull");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
-
-	public String insertProduct(String name, String cat, String date, String price, String desc) {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for inserting.";
-			}
-			// create a prepared statement
-			String query = " insert into product(`product_Name`,`product_category`,`date`,`price`,`description`)" + " values (?, ?, ?, ?, ?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			// binding values
-			preparedStmt.setString(1, name);
-			preparedStmt.setString(2, cat);
-			preparedStmt.setString(3, date);
-			preparedStmt.setString(4, price);
-			preparedStmt.setString(5, desc);
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-			output = "Inserted successfully";
-		} catch (Exception e) {
-			output = "Error while inserting the item.";
-			System.err.println(e.getMessage());
-			System.out.println(e);
-			e.printStackTrace();
-		}
-		return output;
-	}
-
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
 	public String readProducts() {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for reading.";
-			}
-			// Prepare the html table to be displayed
-			output = "<table border='1'><tr><th>Product ID</th><th>Product Name</th>" + "<th>Product Category</th>"
-					+ "<th>Product Date</th><th>Product Price</th><th>Product Description</th>";
+		return product.readProducts();
 
-			String query = "select * from product";
-
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-
-			// iterate through the rows in the result set
-			while (rs.next()) {
-				String product_ID = Integer.toString(rs.getInt("product_Id"));
-				String product_Name = rs.getString("product_Name");
-				String product_Category = rs.getString("product_category");
-				String date = rs.getString("date");
-				String price = rs.getString("price");
-				String description = rs.getString("description");
-				output += "<tr><td>" + product_ID + "</td>";
-				output += "<td>" + product_Name + "</td>";
-				output += "<td>" + product_Category + "</td>";
-				output += "<td>" + date + "</td>";
-				output += "<td>" + price + "</td>";
-				output += "<td>" + description + "</td>";
-				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
-						+ "<td><form method='post' action='items.jsp'>"
-						+ "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
-						+ "<input name='productID' type='hidden' value='" + product_ID + "'>" + "</form></td></tr>";
-
-			}
-			con.close();
-			// Complete the html table
-			output += "</table>";
-//			System.out.println("cc");
-
-		} catch (Exception e) {
-			output = "Error while reading the Product.";
-			System.out.println(e.getMessage());
-			System.out.println(e);
-			e.printStackTrace();
-		}
-		return output;
-
-	}
-
-	public String updateProduct(String ID, String Name, String cat, String date, String price, String desc) {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for updating.";
-			}
-			// create a prepared statement
-			String query = "UPDATE product SET product_Name=?,product_category=?,date=?,price=?,description=? WHERE product_Id=?";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			// binding values
-			preparedStmt.setString(1, Name);
-			preparedStmt.setString(2, cat);
-			preparedStmt.setString(3, date);
-			preparedStmt.setString(4, price);
-			preparedStmt.setString(5, desc);
-			preparedStmt.setString(6, ID);
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-			output = "Updated successfully";
-		} catch (Exception e) {
-			output = "Error while updating the Product.";
-			System.err.println(e.getMessage());
-			System.out.println(e);
-			e.printStackTrace();
-		}
-		return output;
 	}
 	
-	public String deleteProduct(String productId) {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for deleting.";
-			}
-			// create a prepared statement
-			String query = "delete from product where product_Id=?";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(productId));
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-			output = "Deleted successfully";
-		} catch (Exception e) {
-			output = "Error while deleting the Product.";
-			System.err.println(e.getMessage());
-		}
+	@POST
+	@Path("/")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
+	public String insertProdect(
+				@FormParam("prodect_name") String product_Name,
+				@FormParam("prodect_category") String product_category,
+				@FormParam("date") String date,
+				@FormParam("price") String price,
+				@FormParam("description") String description) {
+		
+		String output =  product.insertProduct(product_Name, product_category, date, price, description);
 		return output;
 	}
-}
 
+	
+	@DELETE
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_XML) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String deleteProduct(String productData) 
+	{ 
+	//Convert the input string to an XML document
+	 Document doc = Jsoup.parse(productData, "", Parser.xmlParser()); 
+	 
+	//Read the value from the element <itemID>
+	 String product_Id = doc.select("product_Id").text(); 
+	 String output = product.deleteProduct(product_Id); 
+	return output; 
+	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateProduct(String productData) {
+		//Convert the input string to a JSON object
+		
+		JsonObject productObject = new JsonParser().parse(productData).getAsJsonObject();
+		 
+		//Read the values from the JSON object
+		
+		 String product_ID = productObject.get("product_Id").getAsString(); 
+		 String product_Name = productObject.get("product_Name").getAsString();
+		 String project_category = productObject.get("project_category").getAsString();
+		 String date = productObject.get("date").getAsString();
+		 String price = productObject.get("price").getAsString();
+		 String description= productObject.get("description").getAsString();
+		 String output = product.updateProduct(product_ID, product_Name, project_category, date, price, description);
+		return output;
+		 
+	}
+
+}
