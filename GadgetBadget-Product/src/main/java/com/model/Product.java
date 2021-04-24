@@ -37,47 +37,30 @@ public class Product {
 	@Path("/")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
-	public String insertProject(
-				@FormParam("project_name") String productName,
-				@FormParam("project_category") String product_category,
-				@FormParam("date") String date) {
+	public String insertProdect(
+				@FormParam("prodect_name") String product_Name,
+				@FormParam("prodect_category") String product_category,
+				@FormParam("date") String date,
+				@FormParam("price") String price,
+				@FormParam("description") String description) {
 		
-		String output =  product.insertProduct(productName, product_category, date);
+		String output =  product.insertProduct(product_Name, product_category, date, price, description);
 		return output;
 	}
-//	
-//	@PUT
-//	@Path("/")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.TEXT_PLAIN)
-//	public String updateProduct(String productData) {
-//		//Convert the input string to a JSON object
-//		
-//		JsonObject productObject = new JsonParser().parse(productData).getAsJsonObject();
-//		 
-//		//Read the values from the JSON object
-//		
-//		 String productID = productData.get("productId").getAsString(); 
-//		 String productName = productData.get("project_name").getAsString();
-//		 String productCat = productData.get("project_category").getAsString();
-//		 String productDate = productData.get("date").getAsString();
-//		 String output = product.updateProduct(productID, productName, productCat, productDate);
-//		return output;
-//		 
-//	}
+
 	
 	@DELETE
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String deleteItem(String itemData) 
+	public String deleteProduct(String productData) 
 	{ 
 	//Convert the input string to an XML document
-	 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
+	 Document doc = Jsoup.parse(productData, "", Parser.xmlParser()); 
 	 
 	//Read the value from the element <itemID>
-	 String productId = doc.select("productId").text(); 
-	 String output = product.deleteItem(productId); 
+	 String product_Id = doc.select("product_Id").text(); 
+	 String output = product.deleteProduct(product_Id); 
 	return output; 
 	}
 }
