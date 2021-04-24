@@ -14,7 +14,7 @@ public class ProjectServlet {
 				
 				con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gadgetbadget", "root", "");
 				
-				System.out.println("succsess");
+				System.out.println("Connection succsessfull");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -49,7 +49,6 @@ public class ProjectServlet {
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
 				
-//				System.out.println(query);
 				ps.execute();
 				con.close();
 				output = "Project Details have been Inserted Successfully !";
@@ -125,7 +124,9 @@ public class ProjectServlet {
 				output += "</table></div>";
 			} catch (Exception e) {
 				output = "Error while reading the project details...!";
-				System.err.println(e.getMessage());
+				System.out.println(e.getMessage());
+				System.out.println(e);
+				e.printStackTrace();
 			}
 			return output;
 		}
