@@ -39,8 +39,6 @@ public class Funder {
 			}
 
 			// create a prepared statement
-			//LocalDate date = LocalDate.now();
-			//LocalTime time = LocalTime.now();
 			String query = "insert into funder(title,content,pdate,ptime) values (?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
@@ -178,7 +176,10 @@ public class Funder {
 		} catch (Exception e) {
 			output = "Error while deleting the item.";
 			System.err.println(e.getMessage());
+			System.out.println(e);
+			e.printStackTrace();
 		}
+		
 		return output;
 	}
 
