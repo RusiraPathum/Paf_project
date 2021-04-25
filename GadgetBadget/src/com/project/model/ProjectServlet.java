@@ -205,7 +205,7 @@ public class ProjectServlet {
 	
 		//update
 		public String updateProject(String pid, String project_category, String project_name, 
-				String short_des, String price, String date, String project_goal, String long_des) {
+				String short_des, String price, String date, String project_goal, String long_des, String status) {
 			
 			String output = "";
 			
@@ -216,7 +216,7 @@ public class ProjectServlet {
 					return "Error while connecting to the database for updating.";
 				}
 				
-				String query = "UPDATE project SET project_category=?, project_name=?, short_des=?, price=?, date=?, project_goal=?, long_des=? where pid=?";
+				String query = "UPDATE project SET project_category=?, project_name=?, short_des=?, price=?, date=?, project_goal=?, long_des=?, status=? where pid=?";
 				PreparedStatement ps = con.prepareStatement(query);
 				
 				ps.setString(1, project_category);
@@ -226,7 +226,8 @@ public class ProjectServlet {
 				ps.setString(5, date);
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
-				ps.setString(8, pid);
+				ps.setString(8, status);
+				ps.setString(9, pid);
 				
 				ps.execute();
 				con.close();

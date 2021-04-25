@@ -83,8 +83,9 @@ public class ProjectService {
 		String date = projectObject.get("date").getAsString();
 		String project_goal = projectObject.get("project_goal").getAsString();
 		String long_des = projectObject.get("long_des").getAsString();
+		String status = projectObject.get("status").getAsString();
 		
-		String output = projectObj.updateProject(pid, pproject_categoryid, project_name, short_des, price, date, project_goal, long_des);
+		String output = projectObj.updateProject(pid, pproject_categoryid, project_name, short_des, price, date, project_goal, long_des, status);
 		return output;
 	
 	}
