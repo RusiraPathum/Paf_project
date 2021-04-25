@@ -23,7 +23,7 @@ public class ProjectServlet {
 		}
 		
 		//insert
-		public String insertProject (String project_category, String project_name, String short_des, String price, String date, String project_goal, String long_des) {
+		public String insertProject (String project_category, String project_name, String short_des, String price, String date, String project_goal, String long_des, String status) {
 			
 			String output = "";
 			
@@ -34,7 +34,7 @@ public class ProjectServlet {
 					return "Error Inserting";
 				}
 				
-				String query = "INSERT INTO project (project_category, project_name, short_des, price, date, project_goal, long_des) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO project (project_category, project_name, short_des, price, date, project_goal, long_des, status) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 				
 			
 				
@@ -48,6 +48,7 @@ public class ProjectServlet {
 				ps.setString(5, date);
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
+				ps.setString(8, status);
 				
 				ps.execute();
 				con.close();
@@ -83,6 +84,7 @@ public class ProjectServlet {
 						+ "<th style='padding:10px; text-align:center;'>Project date</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Goal</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Loang Description</th>"
+						+ "<th style='padding:10px; text-align:center;'>Status</th>"
 						+ "<th style='padding:10px; text-align:center;'>Update</th><th>Remove</th></tr>";
 
 				String query = "SELECT * FROM project";
@@ -99,6 +101,7 @@ public class ProjectServlet {
 					String projectDate = rs.getString("date");
 					String projectGoal = rs.getString("project_goal");
 					String projectLongDes = rs.getString("long_des");
+					String projectStatus = rs.getString("status");
 					
 //					System.out.println(projectID);
 //					System.out.println(projectName);
@@ -112,6 +115,7 @@ public class ProjectServlet {
 					output += "<td style='padding:10px; text-align:center;'>" + projectDate + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectGoal + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectLongDes + "</td>";
+					output += "<td style='padding:10px; text-align:center;'>" + projectStatus + "</td>";
 
 					// buttons
 					output += "<td style='padding:10px; text-align:center;'><input name='btnUpdate' type='button' value='Update' class='btn btn-info'></td>"
@@ -152,7 +156,7 @@ public class ProjectServlet {
 						+ "<th style='padding:10px; text-align:center;'>Project date</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Goal</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Loang Description</th>"
-						+ "<th style='padding:10px; text-align:center;'>Update</th><th>Remove</th></tr>";
+						+ "<th style='padding:10px; text-align:center;'>Status</th>";
 
 				String query = "SELECT * FROM project";
 //				System.out.println(query);
@@ -168,6 +172,7 @@ public class ProjectServlet {
 					String projectDate = rs.getString("date");
 					String projectGoal = rs.getString("project_goal");
 					String projectLongDes = rs.getString("long_des");
+					String projectStatus = rs.getString("status");
 					
 //					System.out.println(projectID);
 //					System.out.println(projectName);
@@ -181,18 +186,15 @@ public class ProjectServlet {
 					output += "<td style='padding:10px; text-align:center;'>" + projectDate + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectGoal + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectLongDes + "</td>";
+					output += "<td style='padding:10px; text-align:center;'>" + projectStatus + "</td>";
 
 					// buttons
-//					output += "<td style='padding:10px; text-align:center;'><input name='btnUpdate' type='button' value='Update' class='btn btn-info'></td>"
-//							+ "<td style='padding:10px; text-align:center;'><form method='post' action='items.jsp'>"
-//							+ "<input style='margin-top:15px' name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-//							+ "<input name='itemID' type='hidden' value='" + projectID + "'>" + "</form></td></tr>";
 				}
 				con.close();
 				// Complete the html table
 				output += "</table></div>";
 			} catch (Exception e) {
-				output = "Error while reading the project details...!";
+				output = "Error while reading the Only project details...!";
 				System.err.println(e.getMessage());
 			}
 			return output;
@@ -201,7 +203,7 @@ public class ProjectServlet {
 	
 		//update
 		public String updateProject(String pid, String project_category, String project_name, 
-				String short_des, String price, String date, String project_goal, String long_des) {
+				String short_des, String price, String date, String project_goal, String long_des, String status) {
 			
 			String output = "";
 			
@@ -212,7 +214,7 @@ public class ProjectServlet {
 					return "Error while connecting to the database for updating.";
 				}
 				
-				String query = "UPDATE project SET project_category=?, project_name=?, short_des=?, price=?, date=?, project_goal=?, long_des=? where pid=?";
+				String query = "UPDATE project SET project_category=?, project_name=?, short_des=?, price=?, date=?, project_goal=?, long_des=?, status=? where pid=?";
 				PreparedStatement ps = con.prepareStatement(query);
 				
 				ps.setString(1, project_category);
@@ -222,7 +224,8 @@ public class ProjectServlet {
 				ps.setString(5, date);
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
-				ps.setString(8, pid);
+				ps.setString(8, status);
+				ps.setString(9, pid);
 				
 				ps.execute();
 				con.close();
