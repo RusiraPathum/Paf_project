@@ -57,9 +57,10 @@ public class ProjectService {
 				@FormParam("price") String price,
 				@FormParam("date") String date,
 				@FormParam("project_goal") String project_goal,
-				@FormParam("long_des") String long_des) {
+				@FormParam("long_des") String long_des,
+				@FormParam("status") String status) {
 		
-		String output =  projectObj.insertProject(project_category, project_name, short_des, price, date, project_goal, long_des);
+		String output =  projectObj.insertProject(project_category, project_name, short_des, price, date, project_goal, long_des, status);
 		return output;
 	}
 	

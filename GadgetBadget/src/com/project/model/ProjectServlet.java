@@ -23,7 +23,7 @@ public class ProjectServlet {
 		}
 		
 		//insert
-		public String insertProject (String project_category, String project_name, String short_des, String price, String date, String project_goal, String long_des) {
+		public String insertProject (String project_category, String project_name, String short_des, String price, String date, String project_goal, String long_des, String status) {
 			
 			String output = "";
 			
@@ -34,7 +34,7 @@ public class ProjectServlet {
 					return "Error Inserting";
 				}
 				
-				String query = "INSERT INTO project (project_category, project_name, short_des, price, date, project_goal, long_des) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO project (project_category, project_name, short_des, price, date, project_goal, long_des, status) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 				
 			
 				
@@ -48,6 +48,7 @@ public class ProjectServlet {
 				ps.setString(5, date);
 				ps.setString(6, project_goal);
 				ps.setString(7, long_des);
+				ps.setString(8, status);
 				
 				ps.execute();
 				con.close();
@@ -83,6 +84,7 @@ public class ProjectServlet {
 						+ "<th style='padding:10px; text-align:center;'>Project date</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Goal</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Loang Description</th>"
+						+ "<th style='padding:10px; text-align:center;'>Status</th>"
 						+ "<th style='padding:10px; text-align:center;'>Update</th><th>Remove</th></tr>";
 
 				String query = "SELECT * FROM project";
@@ -99,6 +101,7 @@ public class ProjectServlet {
 					String projectDate = rs.getString("date");
 					String projectGoal = rs.getString("project_goal");
 					String projectLongDes = rs.getString("long_des");
+					String projectStatus = rs.getString("status");
 					
 //					System.out.println(projectID);
 //					System.out.println(projectName);
@@ -112,6 +115,7 @@ public class ProjectServlet {
 					output += "<td style='padding:10px; text-align:center;'>" + projectDate + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectGoal + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectLongDes + "</td>";
+					output += "<td style='padding:10px; text-align:center;'>" + projectStatus + "</td>";
 
 					// buttons
 					output += "<td style='padding:10px; text-align:center;'><input name='btnUpdate' type='button' value='Update' class='btn btn-info'></td>"
