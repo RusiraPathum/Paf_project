@@ -172,6 +172,7 @@ public class ProjectServlet {
 					String projectDate = rs.getString("date");
 					String projectGoal = rs.getString("project_goal");
 					String projectLongDes = rs.getString("long_des");
+					String projectStatus = rs.getString("status");
 					
 //					System.out.println(projectID);
 //					System.out.println(projectName);
@@ -185,18 +186,15 @@ public class ProjectServlet {
 					output += "<td style='padding:10px; text-align:center;'>" + projectDate + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectGoal + "</td>";
 					output += "<td style='padding:10px; text-align:center;'>" + projectLongDes + "</td>";
+					output += "<td style='padding:10px; text-align:center;'>" + projectStatus + "</td>";
 
 					// buttons
-//					output += "<td style='padding:10px; text-align:center;'><input name='btnUpdate' type='button' value='Update' class='btn btn-info'></td>"
-//							+ "<td style='padding:10px; text-align:center;'><form method='post' action='items.jsp'>"
-//							+ "<input style='margin-top:15px' name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-//							+ "<input name='itemID' type='hidden' value='" + projectID + "'>" + "</form></td></tr>";
 				}
 				con.close();
 				// Complete the html table
 				output += "</table></div>";
 			} catch (Exception e) {
-				output = "Error while reading the project details...!";
+				output = "Error while reading the Only project details...!";
 				System.err.println(e.getMessage());
 			}
 			return output;
