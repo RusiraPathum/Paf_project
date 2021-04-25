@@ -156,7 +156,7 @@ public class ProjectServlet {
 						+ "<th style='padding:10px; text-align:center;'>Project date</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Goal</th>"
 						+ "<th style='padding:10px; text-align:center;'>Project Loang Description</th>"
-						+ "<th style='padding:10px; text-align:center;'>Update</th><th>Remove</th></tr>";
+						+ "<th style='padding:10px; text-align:center;'>Status</th>";
 
 				String query = "SELECT * FROM project";
 //				System.out.println(query);
