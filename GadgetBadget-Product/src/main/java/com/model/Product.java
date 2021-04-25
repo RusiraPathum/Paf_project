@@ -22,7 +22,7 @@ public class Product {
 		return con;
 	}
 
-	public String insertProduct(String name, String cat, String date, String price, String desc) {
+	public String insertProduct(String name, String cat, String price, String desc) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -30,14 +30,13 @@ public class Product {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into product(`product_Name`,`product_category`,`date`,`price`,`description`)" + " values (?, ?, ?, ?, ?)";
+			String query = " insert into product(`product_Name`,`product_category`,`price`,`description`)" + " values (?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, name);
 			preparedStmt.setString(2, cat);
-			preparedStmt.setString(3, date);
-			preparedStmt.setString(4, price);
-			preparedStmt.setString(5, desc);
+			preparedStmt.setString(3, price);
+			preparedStmt.setString(4, desc);
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -60,7 +59,7 @@ public class Product {
 			}
 			// Prepare the html table to be displayed
 			output = "<table border='1'><tr><th>Product ID</th><th>Product Name</th>" + "<th>Product Category</th>"
-					+ "<th>Product Date</th><th>Product Price</th><th>Product Description</th>";
+					+ "<th>Product Price</th><th>Product Description</th>";
 
 			String query = "select * from product";
 
@@ -72,13 +71,11 @@ public class Product {
 				String product_ID = Integer.toString(rs.getInt("product_Id"));
 				String product_Name = rs.getString("product_Name");
 				String product_Category = rs.getString("product_category");
-				String date = rs.getString("date");
 				String price = rs.getString("price");
 				String description = rs.getString("description");
 				output += "<tr><td>" + product_ID + "</td>";
 				output += "<td>" + product_Name + "</td>";
 				output += "<td>" + product_Category + "</td>";
-				output += "<td>" + date + "</td>";
 				output += "<td>" + price + "</td>";
 				output += "<td>" + description + "</td>";
 				// buttons
@@ -103,7 +100,7 @@ public class Product {
 
 	}
 
-	public String updateProduct( String ID, String Name, String cat, String date, String price, String desc) {
+	public String updateProduct( String ID, String Name, String cat, String price, String desc) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -111,15 +108,14 @@ public class Product {
 				return "Error while connecting to the database for updating.";
 			}
 			// create a prepared statement
-			String query = "UPDATE product SET product_Name=?,product_category=?,date=?,price=?,description=? WHERE product_Id=?";
+			String query = "UPDATE product SET product_Name=?,product_category=?,price=?,description=? WHERE product_Id=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, Name);
 			preparedStmt.setString(2, cat);
-			preparedStmt.setString(3, date);
-			preparedStmt.setString(4, price);
-			preparedStmt.setString(5, desc);
-			preparedStmt.setString(6, ID);
+			preparedStmt.setString(3, price);
+			preparedStmt.setString(4, desc);
+			preparedStmt.setString(5, ID);
 			// execute the statement
 			preparedStmt.execute();
 			con.close();

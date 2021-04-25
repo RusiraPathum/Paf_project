@@ -40,11 +40,10 @@ public class ProductService {
 	public String insertProdect(
 				@FormParam("prodect_name") String product_Name,
 				@FormParam("prodect_category") String product_category,
-				@FormParam("date") String date,
 				@FormParam("price") String price,
 				@FormParam("description") String description) {
 		
-		String output =  product.insertProduct(product_Name, product_category, date, price, description);
+		String output =  product.insertProduct(product_Name, product_category, price, description);
 		return output;
 	}
 
@@ -78,10 +77,9 @@ public class ProductService {
 		 String product_ID = productObject.get("product_Id").getAsString(); 
 		 String product_Name = productObject.get("product_Name").getAsString();
 		 String project_category = productObject.get("project_category").getAsString();
-		 String date = productObject.get("date").getAsString();
 		 String price = productObject.get("price").getAsString();
 		 String description= productObject.get("description").getAsString();
-		 String output = product.updateProduct(product_ID, product_Name, project_category, date, price, description);
+		 String output = product.updateProduct(product_ID, product_Name, project_category, price, description);
 		return output;
 		 
 	}
