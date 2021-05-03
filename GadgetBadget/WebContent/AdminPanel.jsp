@@ -168,75 +168,16 @@ body {
 	<main class="content-wrapper">
 		<div class="container-fluid">
 			<section class="mt-3">
-				<div class="container">
-					<h2 class="mb-3">Add Project Details</h2>
-					<form class="row g-3 needs-validation" novalidate>
-						<div class="col-md-12 mb-3">
-							<label for="validationCustom03" class="form-label">Select
-								Project Category</label> <select class="form-select form-control"
-								id="project_category" name="project_category"
-								aria-label="Default select example">
-								<option selected>Select Project Category</option>
-								<option value="1">Art</option>
-								<option value="2">Technology</option>
-								<option value="3">Design And Tech</option>
-								<option value="3">Game</option>
-								<option value="3">Music</option>
-								<option value="3">Food</option>
-								<option value="3">Films</option>
-							</select>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationCustom01" class="form-label">Project
-								Name</label> <input type="text" class="form-control" id="project_name"
-								name="project_name" placeholder="Project Name">
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationCustom02" class="form-label">Short
-								Description</label> <input type="text" class="form-control"
-								id="short_des" name="short_des" placeholder="Short Description">
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationCustomUsername" class="form-label">Date</label>
-							<input type="date" class="form-control"
-								id="date" name="date"
-								aria-describedby="inputGroupPrepend">
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationCustom03" class="form-label">Project Goal</label> <input
-								type="text" class="form-control" id="project_goal" name="project_goal" placeholder="Project Goal">
-						</div>
-						<!-- <div class="col-md-6 mb-3">
-							<label for="validationCustom03" class="form-label">Select</label>
-							<select class="form-select form-control"
-								aria-label="Default select example">
-								<option selected>Open this select menu</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
-						</div> -->
-
-						<div class="col-md-6">
-							<label for="validationCustom05" class="form-label">Long Description</label>
-								<textarea id="form10" id="long_des" name="long_des" class="md-textarea form-control" rows="5" placeholder="Long Description"></textarea>
-						</div>
-
-						<div class="col-12 mt-5">
-							<button class="btn btn-primary" type="button">Save
-								Project</button>
-						</div>
-					</form>
-				</div>
+				<img style="background-repeat: no-repeat;" alt="" src="https://i.postimg.cc/GmwG7sGV/paf.png" width="100%" height="100%">
 			</section>
 		</div>
 	</main>
 
-	<footer class="footer">
+	<footer class="footer bg-dark">
 		<div class="container">
-			<div class="text-center">
-				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
-					2018
+			<div class="text-center text-light">
+				<span>Create by , <span style="color: #87CEEB;">PAF Team</span>
+					2021
 				</span>
 			</div>
 		</div>

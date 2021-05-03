@@ -27,6 +27,10 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 
+<link rel="stylesheet" href="Views/bootstrap.min.css">
+
+
+
 <style type="text/css">
 html {
 	position: relative;
@@ -181,7 +185,7 @@ body {
 			<section class="mt-3">
 				<div class="container">
 					<h2 class="mb-3">Add Project Details</h2>
-					<form class="row g-3 needs-validation" novalidate>
+					<form class="row g-3 needs-validation" id="myForm" novalidate>
 						<div class="col-md-12 mb-3">
 							<label for="validationCustom03" class="form-label">Select
 								Project Category</label> <select class="form-select form-control"
@@ -208,14 +212,26 @@ body {
 								id="short_des" name="short_des" placeholder="Short Description">
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="validationCustomUsername" class="form-label">Date</label>
-							<input type="date" class="form-control"
-								id="date" name="date"
+							<label for="validationCustomUsername" class="form-label">Price</label>
+							<input type="number" class="form-control" id="price" name="price"
 								aria-describedby="inputGroupPrepend">
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="validationCustom03" class="form-label">Project Goal</label> <input
-								type="text" class="form-control" id="project_goal" name="project_goal" placeholder="Project Goal">
+							<label for="validationCustomUsername" class="form-label">Date</label>
+							<input type="date" class="form-control" id="date" name="date"
+								aria-describedby="inputGroupPrepend">
+						</div>
+						<div class="col-md-6">
+							<label for="validationCustom05" class="form-label">Long
+								Description</label>
+							<textarea id="form10" id="long_des" name="long_des"
+								class="md-textarea form-control" rows="5"
+								placeholder="Long Description"></textarea>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationCustom03" class="form-label">Project
+								Goal</label> <input type="text" class="form-control" id="project_goal"
+								name="project_goal" placeholder="Project Goal">
 						</div>
 						<!-- <div class="col-md-6 mb-3">
 							<label for="validationCustom03" class="form-label">Select</label>
@@ -228,27 +244,28 @@ body {
 							</select>
 						</div> -->
 
-						<div class="col-md-6">
-							<label for="validationCustom05" class="form-label">Long Description</label>
-								<textarea id="form10" id="long_des" name="long_des" class="md-textarea form-control" rows="5" placeholder="Long Description"></textarea>
+						<div class="mt-3 ml-3">
+							<div id="alertSuccess" class="alert alert-success"></div>
+							<div id="alertError" class="alert alert-danger"></div>
 						</div>
+						
 
-						<div class="col-12 mt-5">
-							<button class="btn btn-primary" type="button">Save
+						<div class="col-12 mt-3 mb-5">
+							<button class="btn btn-primary float-right" id="save_project" type="button">Save
 								Project</button>
 						</div>
 					</form>
-					
-					
+
+
 				</div>
 			</section>
 		</div>
 	</main>
 
-	<footer class="footer">
+	<footer class="footer bg-dark">
 		<div class="container">
-			<div class="text-center">
-				<span>Team  <a href="#">SI-Dev</a>,
+			<div class="text-center text-light">
+				<span>Create by , <span style="color: #87CEEB;">PAF Team</span>
 					2021
 				</span>
 			</div>
@@ -280,7 +297,7 @@ body {
 		</div>
 	</div>
 
-
+<script src="Components/project.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.nav-link-collapse').on('click', function() {
